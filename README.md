@@ -7,7 +7,7 @@
 ## Installing Ecs System Initialization
 
 To use System Initialization add this repo to your unity project. Create an instance of SystemInitializationSettings from the editor via the "Assets/Create/Entities/System Initialization Settings" menu. 
-SystemInitializationSettings detectará automáticamente todos los sistemas integrados en tu proyecto en modo runtime y se actualizará de forma automática. Simplemente deshabilita los componentes que desees desde el inspector.
+SystemInitializationSettings will automatically detect all the systems integrated in your project in runtime mode and will update automatically. Just disable the components you want from the inspector.
 > **Warning**
 > System Initialization requires the com.unity.entities 1.0 package to work.
 
