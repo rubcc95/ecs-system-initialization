@@ -8,7 +8,7 @@
 
 To use System Initialization add this repo to your unity project. Create an instance of SystemInitializationSettings from the editor via the "Assets/Create/Entities/System Initialization Settings" menu. 
 > **Warning**
->System Initialization requires the com.unity.entities 1.0 package to work.
+> System Initialization requires the com.unity.entities 1.0 package to work.
 
 SystemInitializationSettings detectará automáticamente todos los sistemas integrados en tu proyecto en modo runtime y se actualizará de forma automática. Simplemente deshabilita los componentes que desees desde el inspector.
 
