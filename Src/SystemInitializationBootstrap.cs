@@ -6,7 +6,7 @@ namespace Hagans.Ecs.SystemInitialization
 {
     readonly struct SystemInitializationBootstrap : ICustomBootstrap
     {
-        public bool Initialize(string defaultWorldName)
+        public static bool Initialize(string defaultWorldName)
         {
             var world = new World(defaultWorldName, WorldFlags.Game);
 
@@ -21,5 +21,7 @@ namespace Hagans.Ecs.SystemInitialization
     #endif
             return true;
         }
+        
+        bool ICustomBootstrap.Initialize(string defaultWorldName) => Initialize(defaultWorldName);
     }
 }
