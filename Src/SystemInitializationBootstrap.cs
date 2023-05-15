@@ -2,21 +2,24 @@
 
 using Unity.Entities;
 
-readonly struct SystemInitializationBootstrap : ICustomBootstrap
+namespace Hagans.Ecs.SystemInitialization
 {
-    public bool Initialize(string defaultWorldName)
+    readonly struct SystemInitializationBootstrap : ICustomBootstrap
     {
-        var world = new World(defaultWorldName, WorldFlags.Game);
+        public bool Initialize(string defaultWorldName)
+        {
+            var world = new World(defaultWorldName, WorldFlags.Game);
 
-        World.DefaultGameObjectInjectionWorld = world;
+            World.DefaultGameObjectInjectionWorld = world;
 
-        var initSettings = SystemInitializationSettings.Instance;
-        var systemList = initSettings != null ? initSettings.Systems : DefaultWorldInitialization.GetAllSystems(WorldSystemFilterFlags.Default);
-        DefaultWorldInitialization.AddSystemsToRootLevelSystemGroups(world, systemList);
+            var initSettings = SystemInitializationSettings.Instance;
+            var systemList = initSettings != null ? initSettings.Systems : DefaultWorldInitialization.GetAllSystems(WorldSystemFilterFlags.Default);
+            DefaultWorldInitialization.AddSystemsToRootLevelSystemGroups(world, systemList);
 
-#if !UNITY_DOTSRUNTIME
-        ScriptBehaviourUpdateOrder.AppendWorldToCurrentPlayerLoop(world);
-#endif
-        return true;
+    #if !UNITY_DOTSRUNTIME
+            ScriptBehaviourUpdateOrder.AppendWorldToCurrentPlayerLoop(world);
+    #endif
+            return true;
+        }
     }
 }
