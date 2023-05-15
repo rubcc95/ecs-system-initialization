@@ -1,6 +1,5 @@
 #nullable enable
 
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using Unity.Entities;
@@ -13,36 +12,13 @@ public class SystemInitializationSettings : ScriptableObject, ISerializationCall
 
     public IReadOnlyList<SystemSettings> Settings => _settings;
 
-#if UNITY_EDITOR
-    static bool _searched;
-#endif
-    static SystemInitializationSettings? _instance;
-    public static SystemInitializationSettings? Instance 
-    {
-        get
-        {
-#if UNITY_EDITOR
-            if(_instance != null)
-                return _instance;
-
-            if (!Application.isPlaying && !_searched)
-            {
-                _searched = true;
-                var instances = Resources.FindObjectsOfTypeAll<SystemInitializationSettings>();
-                Assert.IsTrue(instances.Length < 2);
-                if(instances.Length == 1 ) 
-                    _instance = instances[0];
-            }
-#endif
-            return _instance;
-        }
-    }
+    public static SystemInitializationSettings? Instance { get; private set; }
 
     public IReadOnlyList<Type> Systems { get; private set; } = new Type[0];
  
     public void OnAfterDeserialize()
     {
-        _instance = this;
+        Instance = this;
 
         var systems = new List<Type>();
 
